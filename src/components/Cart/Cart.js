@@ -1,4 +1,5 @@
 import React from 'react';
+import Modal from '../UI/Modal';
 import classes from './Cart.module.css';
 
 const Cart = () => {
@@ -18,7 +19,7 @@ const Cart = () => {
   );
 
   return (
-    <React.Fragment>
+    <Modal>
       {cartItems}
       <div className={classes.total}>
         <span>Total amount</span>
@@ -28,7 +29,7 @@ const Cart = () => {
         <button className={classes['button--alt']}>Close</button>
         <button className={classes.button}>Order</button>
       </div>
-    </React.Fragment>
+    </Modal>
   );
 };
 

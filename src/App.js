@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './components/Layout/Header';
 import Meals from './components/Meals/Meals';
-import Modal from './components/UI/Modal';
+import Cart from './components/Cart/Cart';
 
 const App = () => {
   return (
@@ -9,7 +9,7 @@ const App = () => {
       <main>
         <Header />
         <Meals />
-        <Modal />
+        <Cart />
       </main>
     </React.Fragment>
   );
