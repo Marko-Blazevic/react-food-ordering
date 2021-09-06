@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Header from './components/Layout/Header';
 import Meals from './components/Meals/Meals';
 import Cart from './components/Cart/Cart';
+import CartContexProvider from './store/CartContexProvider';
 
 const App = () => {
   const [showCart, setShowCart] = useState(false);
@@ -15,13 +16,13 @@ const App = () => {
   };
 
   return (
-    <React.Fragment>
+    <CartContexProvider>
+      <Header onShowCart={showCartHandler} />
+      {showCart && <Cart onHideCart={hideCartHandler} />}
       <main>
-        <Header onShowCart={showCartHandler} />
         <Meals />
-        {showCart && <Cart onHideCart={hideCartHandler} />}
       </main>
-    </React.Fragment>
+    </CartContexProvider>
   );
 };
 
