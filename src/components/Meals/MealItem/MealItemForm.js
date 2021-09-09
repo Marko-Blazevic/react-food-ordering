@@ -26,16 +26,16 @@ const MealItemForm = (props) => {
         input={{
           id: 'amount_' + props.id,
           type: 'number',
-          min: '0',
+          defaultValue: '1',
+          min: '1',
+          max: '10',
           step: '1',
         }}
       />
       <button>+ Add</button>
 
       {inputAmountError && (
-        <p className={classes.error}>
-          Please correct the Amount of your meals!
-        </p>
+        <p className={classes.error}>Please correct the Amount of your meal.</p>
       )}
     </form>
   );

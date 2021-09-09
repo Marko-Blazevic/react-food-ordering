@@ -11,7 +11,7 @@ const App = () => {
     setShowCart(true);
   };
 
-  const hideCartHandler = () => {
+  const hideCartHandler = (event) => {
     setShowCart(false);
   };
 

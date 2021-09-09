@@ -6,10 +6,28 @@ const defaultState = { items: [], totalAmount: 0 };
 const CartContexProvider = (props) => {
   const cartReducer = (cartState, action) => {
     if (action.type === 'ADD') {
-      const updatedCartItems = cartState.items.concat(action.item);
+      const existingCartItemIndex = cartState.items.findIndex(
+        (item) => item.id === action.item.id
+      );
+
+      const existingCartItem = cartState.items[existingCartItemIndex];
+      let updatedItems;
+
+      if (existingCartItem) {
+        const updatedItem = {
+          ...existingCartItem,
+          amount: existingCartItem.amount + action.item.amount,
+        };
+
+        updatedItems = [...cartState.items];
+        updatedItems[existingCartItemIndex] = updatedItem;
+      } else {
+        updatedItems = cartState.items.concat(action.item);
+      }
+
       const updatedTotalAmount =
         cartState.totalAmount + action.item.price * action.item.amount;
-      return { items: updatedCartItems, totalAmount: updatedTotalAmount };
+      return { items: updatedItems, totalAmount: updatedTotalAmount };
     }
     return defaultState;
   };
