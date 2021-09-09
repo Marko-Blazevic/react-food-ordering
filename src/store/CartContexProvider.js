@@ -9,7 +9,6 @@ const CartContexProvider = (props) => {
       const existingCartItemIndex = cartState.items.findIndex(
         (item) => item.id === action.item.id
       );
-
       const existingCartItem = cartState.items[existingCartItemIndex];
       let updatedItems;
 
@@ -29,6 +28,28 @@ const CartContexProvider = (props) => {
         cartState.totalAmount + action.item.price * action.item.amount;
       return { items: updatedItems, totalAmount: updatedTotalAmount };
     }
+
+    if (action.type === 'REMOVE') {
+      const existingCartItemIndex = cartState.items.findIndex(
+        (item) => item.id === action.id
+      );
+      const existingCartItem = cartState.items[existingCartItemIndex];
+      let updatedItems;
+
+      if (existingCartItem.amount === 1) {
+        updatedItems = cartState.items.filter((item) => item.id !== action.id);
+      } else {
+        const updatedItem = {
+          ...existingCartItem,
+          amount: existingCartItem.amount - 1,
+        };
+        updatedItems = [...cartState.items];
+        updatedItems[existingCartItemIndex] = updatedItem;
+      }
+      const updatedTotalAmount = cartState.totalAmount - existingCartItem.price;
+      return { items: updatedItems, totalAmount: updatedTotalAmount };
+    }
+
     return defaultState;
   };
 
